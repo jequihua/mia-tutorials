@@ -1,6 +1,6 @@
 # mia-lidar Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/mia-lidar`
+Source module: `../mia-lidar`
 
 Primary scripts to illustrate:
 
@@ -14,11 +14,11 @@ Primary scripts to illustrate:
 
 Useful source references:
 
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/README.md`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/instructions/02_lidar_teacher_products.md`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/instructions/feature_stack_decision_note.md`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/009_dji_l1_vendor_las_quirks.md`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
+- `../mia-lidar/README.md`
+- `../mia-lidar/instructions/02_lidar_teacher_products.md`
+- `../mia-lidar/instructions/feature_stack_decision_note.md`
+- `../mia-lidar/notes/009_dji_l1_vendor_las_quirks.md`
+- `../mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
 
 Do not commit raw `.las` or `.laz` archives here. Use this folder for tiny
 derived QA fixtures, manifests, or documentation that points to external-drive

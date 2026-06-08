@@ -1,6 +1,6 @@
 # mia-allometric Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/mia-allometric`
+Source module: `../mia-allometric`
 
 Primary scripts to illustrate:
 
@@ -14,10 +14,10 @@ Primary scripts to illustrate:
 
 Useful source references:
 
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/README.md`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/db/schema_volume.sql`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/db/schema_unified.sql`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/db/bigquery_unified_schema.json`
+- `../mia-allometric/README.md`
+- `../mia-allometric/db/schema_volume.sql`
+- `../mia-allometric/db/schema_unified.sql`
+- `../mia-allometric/db/bigquery_unified_schema.json`
 
 Place small CSV or schema excerpts here when needed. The full rebuilt outputs
 should usually stay in the source repo or external storage.

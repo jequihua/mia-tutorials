@@ -12,9 +12,9 @@ teacher manifests/audits.
 
 Source references:
 
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/04_batch_teacher_grid_v1.R`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/instructions/02_lidar_teacher_products.md`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/011_teacher_grid_v1_consensus_dominant_height.md`
+- `../mia-lidar/R/04_batch_teacher_grid_v1.R`
+- `../mia-lidar/instructions/02_lidar_teacher_products.md`
+- `../mia-lidar/notes/011_teacher_grid_v1_consensus_dominant_height.md`
 
 The active teacher target is:
 

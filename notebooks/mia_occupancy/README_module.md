@@ -1,6 +1,6 @@
 # mia-occupancy Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/mia-occupancy`
+Source repo: `../mia-occupancy`
 
 Tutorial goal: show how camera-trap detections become detection histories and
 `spOccupancy` input objects.

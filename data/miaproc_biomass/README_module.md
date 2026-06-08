@@ -1,6 +1,6 @@
 # miaproc Biomass Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/miaproc`
+Source module: `../miaproc`
 
 Primary APIs to illustrate:
 
@@ -11,10 +11,10 @@ Primary APIs to illustrate:
 
 Useful source references:
 
-- `C:/Users/dev/work/manglaria/repos/miaproc/src/miaproc/biomass/api.py`
-- `C:/Users/dev/work/manglaria/repos/miaproc/src/miaproc/biomass/columns.py`
-- `C:/Users/dev/work/manglaria/repos/miaproc/docs/forest_data_schema.csv`
-- `C:/Users/dev/work/manglaria/repos/miaproc/tests/data/biomass/20260303_biomass_test.csv`
+- `../miaproc/src/miaproc/biomass/api.py`
+- `../miaproc/src/miaproc/biomass/columns.py`
+- `../miaproc/docs/forest_data_schema.csv`
+- `../miaproc/tests/data/biomass/20260303_biomass_test.csv`
 
 Place tutorial CSV excerpts here. Minimum useful columns:
 

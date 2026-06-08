@@ -12,9 +12,9 @@ rule-dependent outputs can be re-derived without reprocessing point clouds.
 
 Source references:
 
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/05_audit_teacher_agreement.R`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/06_apply_alternate_tolerance.R`
-- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
+- `../mia-lidar/R/05_audit_teacher_agreement.R`
+- `../mia-lidar/R/06_apply_alternate_tolerance.R`
+- `../mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
 
 ```{r}
 library(readr)

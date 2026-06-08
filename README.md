@@ -9,16 +9,31 @@ the neighboring module repositories.
 
 ## Source Modules
 
-The tutorials currently target these local repositories:
+The tutorials currently target these source repositories. Paths below assume
+that all repositories are cloned as siblings under one parent folder:
+
+```text
+<repos-root>/
+  mia-tutorials/
+  miaproc/
+  geecomposer/
+  mia-climate/
+  mia-lidar/
+  mia-allometric/
+  mia-occupancy/
+```
+
+If your checkout is different, edit the paths in the setup cells or command
+examples to match your local file structure.
 
 | Tutorial area | Source repository | Main runtime | Tutorial format |
 |---|---|---|---|
-| Tree biomass and eddy covariance | `C:/Users/dev/work/manglaria/repos/miaproc` | Python | Jupyter notebooks |
-| Earth Engine compositing | `C:/Users/dev/work/manglaria/repos/geecomposer` | Python | Jupyter notebooks |
-| ERA5-Land climate pipeline | `C:/Users/dev/work/manglaria/repos/mia-climate` | Python scripts | Jupyter notebooks |
-| LiDAR products and teacher grids | `C:/Users/dev/work/manglaria/repos/mia-lidar` | R | Quarto documents |
-| Allometric equation rebuild | `C:/Users/dev/work/manglaria/repos/mia-allometric` | R | Quarto documents |
-| Camera-trap occupancy prep | `C:/Users/dev/work/manglaria/repos/mia-occupancy` | R | Quarto documents |
+| Tree biomass and eddy covariance | `../miaproc` | Python | Jupyter notebooks |
+| Earth Engine compositing | `../geecomposer` | Python | Jupyter notebooks |
+| ERA5-Land climate pipeline | `../mia-climate` | Python scripts | Jupyter notebooks |
+| LiDAR products and teacher grids | `../mia-lidar` | R | Quarto documents |
+| Allometric equation rebuild | `../mia-allometric` | R | Quarto documents |
+| Camera-trap occupancy prep | `../mia-occupancy` | R | Quarto documents |
 
 ## Repository Layout
 
@@ -51,7 +66,7 @@ Use one Python 3.11 virtual environment at the project root for all Python
 tutorials.
 
 ```powershell
-cd C:\Users\dev\work\manglaria\repos\mia-tutorials
+cd <path-to-your-repos>\mia-tutorials
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip wheel setuptools
@@ -61,13 +76,17 @@ python -m pip install -e "..\geecomposer[dev]"
 python -m ipykernel install --user --name mia-tutorials-py311 --display-name "Python (mia-tutorials 3.11)"
 ```
 
+The editable installs above also assume sibling repositories. If your source
+repos live elsewhere, replace `..\miaproc` and `..\geecomposer` with the
+correct local paths.
+
 Optional pieces:
 
 - `miaproc` REddyProc notebooks need the `reddyproc` extra and a working R
   setup for `rpy2`: `python -m pip install -e "..\miaproc[reddyproc]"`.
 - `mia-climate` is currently script-based and has no visible top-level
   `pyproject.toml`. Its tutorials should import helpers by adding
-  `C:/Users/dev/work/manglaria/repos/mia-climate` to `sys.path`, or run the
+  `../mia-climate` to `sys.path`, or run the
   source scripts with that repo as the working directory.
 - Google Earth Engine tutorials require local Earth Engine credentials and a
   project such as `manglariars`.

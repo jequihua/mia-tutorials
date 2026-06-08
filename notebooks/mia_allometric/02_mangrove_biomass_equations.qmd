@@ -12,11 +12,14 @@ wood density, and made available to `miaproc.biomass`.
 
 Source script:
 
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/04_ingest_biomass.R`
+- `../mia-allometric/R/04_ingest_biomass.R`
 
 Python downstream package reference:
 
-- `C:/Users/dev/work/manglaria/repos/miaproc/src/miaproc/biomass/data/equation_application_unified.zstd.parquet`
+- `../miaproc/src/miaproc/biomass/data/equation_application_unified.zstd.parquet`
+
+The source paths assume sibling repositories. Replace `../mia-allometric` or
+`../miaproc` with your local source-repo paths if your checkout differs.
 
 ```{python}
 from miaproc.biomass import load_packaged_equations
@@ -43,7 +46,7 @@ dina[[
 - The direct biomass response is `B` in `kg`.
 
 ```{bash}
-cd C:/Users/dev/work/manglaria/repos/mia-allometric
+cd <path-to-mia-allometric>
 Rscript R/04_ingest_biomass.R
 ```
 

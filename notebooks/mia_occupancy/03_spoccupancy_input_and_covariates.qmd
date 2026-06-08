@@ -12,18 +12,24 @@ Assemble the final list shape expected by `spOccupancy`: `y`, `occ.covs`,
 
 Source files:
 
-- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/spoccupancy_input.R`
-- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/weather.R`
-- `C:/Users/dev/work/manglaria/repos/mia-occupancy/scripts/run_data_preparation.R`
+- `../mia-occupancy/R/spoccupancy_input.R`
+- `../mia-occupancy/R/weather.R`
+- `../mia-occupancy/scripts/run_data_preparation.R`
+
+These paths assume `mia-tutorials` and `mia-occupancy` are sibling
+repositories. Modify `repos_root` or `source_repo` if your checkout uses a
+different layout.
 
 ```{r}
 library(devtools)
 library(dplyr)
 library(readr)
 
-load_all("C:/Users/dev/work/manglaria/repos/mia-occupancy")
-
 root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+repos_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
+source_repo <- file.path(repos_root, "mia-occupancy")
+load_all(source_repo)
+
 camera_path <- file.path(root, "data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
 weather_path <- file.path(root, "data", "mia_occupancy", "weather_daily_excerpt.csv")
 ```

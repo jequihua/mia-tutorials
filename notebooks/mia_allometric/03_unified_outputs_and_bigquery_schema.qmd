@@ -12,9 +12,13 @@ biomass rows.
 
 Source scripts:
 
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/05_build_unified_clean.R`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/06_build_sqlite_unified.R`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/07_export_parquet_unified.R`
+- `../mia-allometric/R/05_build_unified_clean.R`
+- `../mia-allometric/R/06_build_sqlite_unified.R`
+- `../mia-allometric/R/07_export_parquet_unified.R`
+
+The source paths assume `mia-tutorials` and `mia-allometric` are sibling
+repositories. Replace `../mia-allometric` with your local source-repo path if
+your checkout differs.
 
 ```{r}
 library(jsonlite)
@@ -37,7 +41,7 @@ head(bq_schema)
 - response and parse status
 
 ```{bash}
-cd C:/Users/dev/work/manglaria/repos/mia-allometric
+cd <path-to-mia-allometric>
 Rscript R/05_build_unified_clean.R
 Rscript R/06_build_sqlite_unified.R
 Rscript R/07_export_parquet_unified.R

@@ -1,6 +1,6 @@
 # mia-climate Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/mia-climate`
+Source module: `../mia-climate`
 
 Primary scripts and helpers to illustrate:
 
@@ -16,10 +16,10 @@ Primary scripts and helpers to illustrate:
 
 Useful source references:
 
-- `C:/Users/dev/work/manglaria/repos/mia-climate/data/rbmn.geojson`
-- `C:/Users/dev/work/manglaria/repos/mia-climate/data/data_sources.md`
-- `C:/Users/dev/work/manglaria/repos/mia-climate/data/storage_layout.md`
-- `C:/Users/dev/work/manglaria/repos/mia-climate/runs/dev_region/`
+- `../mia-climate/data/rbmn.geojson`
+- `../mia-climate/data/data_sources.md`
+- `../mia-climate/data/storage_layout.md`
+- `../mia-climate/runs/dev_region/`
 
 Place small region polygons and dry-run manifest fixtures here. Keep raw NetCDF
 and derived climate products outside the tutorial repo unless they are tiny

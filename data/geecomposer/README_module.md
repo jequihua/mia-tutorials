@@ -1,6 +1,6 @@
 # geecomposer Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/geecomposer`
+Source module: `../geecomposer`
 
 Primary APIs to illustrate:
 
@@ -13,10 +13,10 @@ Primary APIs to illustrate:
 
 Useful source references:
 
-- `C:/Users/dev/work/manglaria/repos/geecomposer/examples/sentinel2_ndvi_max.py`
-- `C:/Users/dev/work/manglaria/repos/geecomposer/examples/sentinel1_float_gamma_map.py`
-- `C:/Users/dev/work/manglaria/repos/geecomposer/tests/fixtures/sample_aoi.geojson`
-- `C:/Users/dev/work/manglaria/repos/geecomposer/tests/fixtures/multi_feature_aoi.geojson`
+- `../geecomposer/examples/sentinel2_ndvi_max.py`
+- `../geecomposer/examples/sentinel1_float_gamma_map.py`
+- `../geecomposer/tests/fixtures/sample_aoi.geojson`
+- `../geecomposer/tests/fixtures/multi_feature_aoi.geojson`
 
 Place small AOI GeoJSON files and export metadata examples here. Do not store
 large exported rasters in this repo.

@@ -1,6 +1,6 @@
 # miaproc Biomass Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/miaproc`
+Source repo: `../miaproc`
 
 Tutorial goal: show how field tree measurements become tree-level biomass or
 volume estimates using packaged equations, traceability fields, range checks,

@@ -1,6 +1,6 @@
 # mia-allometric Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/mia-allometric`
+Source repo: `../mia-allometric`
 
 Tutorial goal: show how the R allometry rebuild converts source equation
 families into clean CSV, SQLite, parquet, and BigQuery handoff products.

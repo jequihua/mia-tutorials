@@ -12,9 +12,13 @@ schema artifacts copied into this tutorial repo.
 
 Source scripts:
 
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/01_ingest_volume.R`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/02_build_sqlite_volume.R`
-- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/03_export_parquet_volume.R`
+- `../mia-allometric/R/01_ingest_volume.R`
+- `../mia-allometric/R/02_build_sqlite_volume.R`
+- `../mia-allometric/R/03_export_parquet_volume.R`
+
+The source paths assume `mia-tutorials` and `mia-allometric` are sibling
+repositories. Replace `../mia-allometric` with your local source-repo path if
+your checkout differs.
 
 ```{r}
 root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
@@ -31,7 +35,7 @@ cat(paste(head(schema, 60), collapse = "\n"))
 3. `03_export_parquet_volume.R` exports volume parquet artifacts.
 
 ```{bash}
-cd C:/Users/dev/work/manglaria/repos/mia-allometric
+cd <path-to-mia-allometric>
 Rscript R/01_ingest_volume.R
 Rscript R/02_build_sqlite_volume.R
 Rscript R/03_export_parquet_volume.R

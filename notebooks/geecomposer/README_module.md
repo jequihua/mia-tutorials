@@ -1,6 +1,6 @@
 # geecomposer Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/geecomposer`
+Source repo: `../geecomposer`
 
 Tutorial goal: show how to build Earth Engine composites with a small explicit
 API, from initialization and AOIs through Sentinel-2, Sentinel-1, yearly

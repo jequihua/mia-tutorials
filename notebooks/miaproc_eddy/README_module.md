@@ -1,6 +1,6 @@
 # miaproc Eddy Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/miaproc`
+Source repo: `../miaproc`
 
 Tutorial goal: show the eddy covariance processing path from flux and biomet
 CSVs to stage-1 cleaned data, dynamic u-star, gap filling, partitioning, and

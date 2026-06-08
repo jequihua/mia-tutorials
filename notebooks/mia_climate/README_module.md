@@ -1,6 +1,6 @@
 # mia-climate Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/mia-climate`
+Source repo: `../mia-climate`
 
 Tutorial goal: show the ERA5-Land pipeline as a reproducible dry-run first,
 then explain where live CDS acquisition and NetCDF processing fit.

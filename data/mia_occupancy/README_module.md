@@ -1,6 +1,6 @@
 # mia-occupancy Tutorial Data
 
-Source module: `C:/Users/dev/work/manglaria/repos/mia-occupancy`
+Source module: `../mia-occupancy`
 
 Primary files to illustrate:
 

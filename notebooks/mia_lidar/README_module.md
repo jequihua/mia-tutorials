@@ -1,6 +1,6 @@
 # mia-lidar Tutorials
 
-Source repo: `C:/Users/dev/work/manglaria/repos/mia-lidar`
+Source repo: `../mia-lidar`
 
 Tutorial goal: explain the R/lidR LiDAR product workflow from TP/GP/AP triplet
 inspection through CHM/DEM products, teacher-grid construction, agreement QA,
