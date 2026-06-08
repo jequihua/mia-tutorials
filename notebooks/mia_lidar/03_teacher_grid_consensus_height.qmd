@@ -1,0 +1,85 @@
+---
+title: "LiDAR Teacher Grid Consensus Height"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Explain the v1.1 consensus dominant-height teacher label and inspect copied
+teacher manifests/audits.
+
+Source references:
+
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/04_batch_teacher_grid_v1.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/instructions/02_lidar_teacher_products.md`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/011_teacher_grid_v1_consensus_dominant_height.md`
+
+The active teacher target is:
+
+```text
+H_dom_consensus = mean(chm_p95_local, zq95_local) when agreement_qc == 1
+H_dom_consensus = NA otherwise
+```
+
+The current agreement rule is:
+
+```text
+abs(chm_p95 - zq95) <= max(1.5 m, 0.15 * mean(chm_p95, zq95))
+```
+
+```{r}
+library(readr)
+library(dplyr)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+data_dir <- file.path(root, "data", "mia_lidar")
+
+manifest <- readr::read_csv(file.path(data_dir, "teacher_manifest.csv"), show_col_types = FALSE)
+agreement <- readr::read_csv(file.path(data_dir, "audit_agreement_per_parcel.csv"), show_col_types = FALSE)
+```
+
+```{r}
+manifest |>
+  count(agreement_rule_version, agreement_floor_m, agreement_ratio)
+```
+
+```{r}
+agreement |>
+  summarise(
+    parcels = n(),
+    total_cells = sum(n_total, na.rm = TRUE),
+    both_present = sum(n_both, na.rm = TRUE),
+    within = sum(n_within, na.rm = TRUE),
+    outside = sum(n_outside, na.rm = TRUE),
+    pct_outside_given_both = 100 * outside / both_present
+  )
+```
+
+```{r}
+agreement |>
+  arrange(desc(pct_outside_given_both)) |>
+  select(parcel_id, n_total, n_both, pct_outside_given_both, mean_h_p50, mean_offset) |>
+  head(10)
+```
+
+## Batch run pattern
+
+Run from `mia-lidar` only after confirming reserve paths:
+
+```{bash}
+Rscript R/04_batch_teacher_grid_v1.R
+```
+
+Archive these outputs for review:
+
+- `teacher_labels/`
+- `agreement/`
+- `agreement_qc/`
+- `agreement_reason/`
+- `chm_p95/`
+- `chm_p95_count/`
+- `zq95/`
+- secondary feature rasters
+

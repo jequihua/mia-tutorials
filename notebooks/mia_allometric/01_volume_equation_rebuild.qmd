@@ -1,0 +1,45 @@
+---
+title: "Allometric Volume Equation Rebuild"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Walk through the INFYS/SNIF volume-equation rebuild and inspect the committed
+schema artifacts copied into this tutorial repo.
+
+Source scripts:
+
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/01_ingest_volume.R`
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/02_build_sqlite_volume.R`
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/03_export_parquet_volume.R`
+
+```{r}
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+schema_path <- file.path(root, "data", "mia_allometric", "schema_volume.sql")
+schema <- readLines(schema_path, warn = FALSE)
+cat(paste(head(schema, 60), collapse = "\n"))
+```
+
+## Pipeline stages
+
+1. `01_ingest_volume.R` reconstructs workbook headers, joins lookup sheets,
+   normalizes equation text, and parses applicability ranges.
+2. `02_build_sqlite_volume.R` builds the relational volume SQLite database.
+3. `03_export_parquet_volume.R` exports volume parquet artifacts.
+
+```{bash}
+cd C:/Users/dev/work/manglaria/repos/mia-allometric
+Rscript R/01_ingest_volume.R
+Rscript R/02_build_sqlite_volume.R
+Rscript R/03_export_parquet_volume.R
+```
+
+## Review questions
+
+- Are `umafor_code` values preserved as strings?
+- Are DBH and height ranges parsed into numeric min/max fields?
+- Does every evaluable row have `equation_numpy`?
+

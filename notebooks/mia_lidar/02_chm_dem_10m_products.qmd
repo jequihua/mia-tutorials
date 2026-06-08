@@ -1,0 +1,58 @@
+---
+title: "LiDAR CHM and DEM 10 m Products"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Explain and inspect the canonical 10 m CHM and DEM product pattern.
+
+Source scripts:
+
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/00_build_lax_indexes.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/02_batch_chm_mean_10m.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/03_batch_dem_mean_10m.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/out/lidar/lidar/001_chm_mean_10m_data_product.md`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/out/lidar/lidar/002_dem_mean_10m_data_product.md`
+
+## Product logic
+
+The CHM tutorial product reads AP point clouds, rasterizes canopy height at
+1 m, and aggregates to 10 m with mean. The DEM counterpart reads GP point
+clouds and interpolates local ground micro-topography before the same 10 m
+aggregation step.
+
+```{r}
+library(terra)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+chm_path <- file.path(root, "data", "mia_lidar", "sample_chm_mean_10m.tif")
+chm <- terra::rast(chm_path)
+chm
+```
+
+```{r}
+terra::res(chm)
+terra::crs(chm)
+terra::global(chm, fun = c("min", "mean", "max"), na.rm = TRUE)
+```
+
+## Batch run pattern
+
+Run from the `mia-lidar` source repo after editing each script's config block:
+
+```{bash}
+Rscript R/00_build_lax_indexes.R
+Rscript R/02_batch_chm_mean_10m.R
+Rscript R/03_batch_dem_mean_10m.R
+```
+
+Expected output shape:
+
+- one single-band GeoTIFF per area,
+- LAS-native CRS,
+- 10 m grid,
+- product names ending in `_chm_mean_10m.tif` or `_dem_mean_10m.tif`.
+

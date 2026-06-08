@@ -1,0 +1,65 @@
+---
+title: "Events, Periods, and Detection History"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Convert cleaned detections into independent events and replicate-level
+detection histories.
+
+Source files:
+
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/events.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/effort.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/detection_history.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/utils_dates.R`
+
+```{r}
+library(devtools)
+library(dplyr)
+
+load_all("C:/Users/dev/work/manglaria/repos/mia-occupancy")
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+camera_path <- file.path(root, "data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
+
+cam_clean <- read_camera_trap_data(camera_path, tz = "UTC") |>
+  build_scientific_name() |>
+  filter_identified_records()
+```
+
+```{r}
+cam_events <- define_independent_events(cam_clean, threshold_minutes = 30)
+cam_periods <- add_sampling_period(cam_events, date_col = "photo_date", temporal_scale = "month")
+
+effort <- infer_sampling_effort(cam_periods)
+detection_counts <- count_detections(cam_periods)
+taxonomy <- build_taxonomy_table(cam_periods)
+completed_history <- complete_detection_history(detection_counts, effort)
+detection_long <- build_detection_long(completed_history = completed_history, taxonomy = taxonomy)
+detection_wide <- build_detection_wide(detection_long)
+```
+
+```{r}
+list(
+  raw_rows = nrow(cam_clean),
+  independent_events = nrow(cam_events),
+  site_period_effort_rows = nrow(effort),
+  detection_long_rows = nrow(detection_long),
+  detection_wide_rows = nrow(detection_wide)
+)
+```
+
+```{r}
+detection_long |>
+  count(scientific_name, detection, sort = TRUE) |>
+  head(20)
+```
+
+Important modeling caveat: `infer_sampling_effort()` infers effort from
+site-period combinations with retained records. Replace this with deployment
+metadata when true camera effort is available.
+

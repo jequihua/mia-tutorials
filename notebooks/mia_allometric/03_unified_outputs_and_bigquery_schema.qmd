@@ -1,0 +1,48 @@
+---
+title: "Unified Allometry Outputs and BigQuery Schema"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Inspect the unified flat schema that combines `infys` volume rows and `dina`
+biomass rows.
+
+Source scripts:
+
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/05_build_unified_clean.R`
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/06_build_sqlite_unified.R`
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/07_export_parquet_unified.R`
+
+```{r}
+library(jsonlite)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+schema_sql <- readLines(file.path(root, "data", "mia_allometric", "schema_unified.sql"), warn = FALSE)
+bq_schema <- jsonlite::fromJSON(file.path(root, "data", "mia_allometric", "bigquery_unified_schema.json"))
+
+cat(paste(head(schema_sql, 80), collapse = "\n"))
+head(bq_schema)
+```
+
+## Unified table sections
+
+- provenance: `source_dataset`, `source_record_id`
+- geography: state and UMAFOR fields for volume rows
+- taxonomy: raw and standardized scientific names
+- equation text: raw, normalized, NumPy expression, WD-fixed expression
+- applicability: DBH and height range fields
+- response and parse status
+
+```{bash}
+cd C:/Users/dev/work/manglaria/repos/mia-allometric
+Rscript R/05_build_unified_clean.R
+Rscript R/06_build_sqlite_unified.R
+Rscript R/07_export_parquet_unified.R
+```
+
+Downstream handoff: the generated unified parquet is the package data consumed
+by `miaproc.biomass.load_packaged_equations()`.
+

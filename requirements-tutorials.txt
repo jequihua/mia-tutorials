@@ -1,0 +1,12 @@
+jupyterlab
+ipykernel
+notebook
+numpy
+pandas
+matplotlib
+pyarrow
+xarray
+netCDF4
+h5netcdf
+pytest
+

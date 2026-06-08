@@ -1,0 +1,52 @@
+---
+title: "Camera Trap Cleaning"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Read camera-trap detections, standardize core columns, construct scientific
+names, and keep identified records.
+
+Source files:
+
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/io_camera_trap.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/taxonomy.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/R/filtering.R`
+- `C:/Users/dev/work/manglaria/repos/mia-occupancy/scripts/run_camera_only_example.R`
+
+```{r}
+library(devtools)
+library(dplyr)
+
+source_repo <- "C:/Users/dev/work/manglaria/repos/mia-occupancy"
+load_all(source_repo)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+camera_path <- file.path(root, "data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
+```
+
+```{r}
+cam_raw <- read_camera_trap_data(camera_path, tz = "UTC")
+glimpse(cam_raw)
+```
+
+```{r}
+cam_clean <- cam_raw |>
+  build_scientific_name() |>
+  filter_identified_records()
+
+cam_clean |>
+  count(scientific_name, common_name, sort = TRUE) |>
+  head(15)
+```
+
+Review points:
+
+- timestamp parsing creates `photo_datetime` and `photo_date`;
+- camera name is standardized to `site_id`;
+- longitude/latitude become lowercase fields;
+- taxonomy remains inspectable before modeling.
+

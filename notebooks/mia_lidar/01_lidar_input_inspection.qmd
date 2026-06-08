@@ -1,0 +1,70 @@
+---
+title: "LiDAR Input Inspection"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Inspect LiDAR area inputs and lightweight tutorial fixtures before running any
+batch point-cloud processing.
+
+This tutorial is based on:
+
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/helpers.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/01_inspect_inputs.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/003_tp_gp_ap_division_of_labor.md`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/009_dji_l1_vendor_las_quirks.md`
+
+Raw `.las` / `.laz` files are intentionally not copied into this tutorial repo.
+The copied fixtures are a reserve polygon, an extent polygon, and a tiny
+already-derived CHM GeoTIFF.
+
+```{r}
+library(sf)
+library(terra)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+data_dir <- file.path(root, "data", "mia_lidar")
+
+rbmn <- sf::st_read(file.path(data_dir, "rbmn.geojson"), quiet = TRUE)
+extent <- sf::st_read(file.path(data_dir, "rbmnn_extent.geojson"), quiet = TRUE)
+chm <- terra::rast(file.path(data_dir, "sample_chm_mean_10m.tif"))
+```
+
+## Inspect copied fixtures
+
+```{r}
+rbmn
+sf::st_bbox(rbmn)
+```
+
+```{r}
+extent
+sf::st_bbox(extent)
+```
+
+```{r}
+chm
+terra::global(chm, fun = c("min", "mean", "max"), na.rm = TRUE)
+```
+
+## Inspect one raw TP/GP/AP triplet
+
+Use this only when raw LiDAR data are available locally.
+
+```{r}
+source("C:/Users/dev/work/manglaria/repos/mia-lidar/R/helpers.R")
+
+area_dir <- "C:/Users/dev/work/manglaria/repos/mia-lidar/data/lidar/<area-folder>"
+triplet <- find_lidar_triplet(area_dir)
+triplet
+```
+
+Checklist before batch processing:
+
+- `TP`, `GP`, and `AP` files are all present for the area.
+- CRS and units are recorded.
+- DJI L1 vendor quirks are acknowledged: pre-normalized Z, ASPRS class `0`,
+  and scale-factor issues that affect some `lidR` paths.

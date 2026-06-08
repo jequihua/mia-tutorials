@@ -1,0 +1,49 @@
+---
+title: "Mangrove Biomass Equations"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Explain how the four `dina` mangrove biomass equations are ingested, joined to
+wood density, and made available to `miaproc.biomass`.
+
+Source script:
+
+- `C:/Users/dev/work/manglaria/repos/mia-allometric/R/04_ingest_biomass.R`
+
+Python downstream package reference:
+
+- `C:/Users/dev/work/manglaria/repos/miaproc/src/miaproc/biomass/data/equation_application_unified.zstd.parquet`
+
+```{python}
+from miaproc.biomass import load_packaged_equations
+
+eq = load_packaged_equations()
+dina = eq[eq["source_dataset"].eq("dina")]
+dina[[
+    "source_record_id",
+    "scientific_name_apg_raw",
+    "wood_density_value",
+    "equation_numpy",
+    "equation_numpy_wd_fixed",
+    "response_variable",
+    "response_units",
+]]
+```
+
+## What to explain
+
+- The raw source equation is preserved.
+- `DAP` / `DBH` is normalized to `diam`.
+- `WD` is kept as `wd` in `equation_numpy`.
+- `equation_numpy_wd_fixed` substitutes the species wood-density literal.
+- The direct biomass response is `B` in `kg`.
+
+```{bash}
+cd C:/Users/dev/work/manglaria/repos/mia-allometric
+Rscript R/04_ingest_biomass.R
+```
+

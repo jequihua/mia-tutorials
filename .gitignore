@@ -1,0 +1,57 @@
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Jupyter and Quarto generated files
+.ipynb_checkpoints/
+notebooks/**/.ipynb_checkpoints/
+notebooks/**/outputs/
+notebooks/_executed_check/
+notebooks/**/*.html
+notebooks/**/*.pdf
+notebooks/**/_freeze/
+.quarto/
+
+# Local R/RStudio state
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# Local credentials and machine-specific config
+.env
+.env.*
+*.local
+*.secret
+*.key
+*.pem
+
+# Large or generated data areas. Curated small fixtures may live directly
+# under data/<module>/, but raw/derived/external payloads stay out of git.
+data/**/raw/
+data/**/derived/
+data/**/external/
+data/**/scratch/
+
+# Large geospatial and climate payloads that should be referenced, not copied.
+*.las
+*.laz
+*.copc.laz
+*.ept.json
+*.nc
+*.nc4
+*.h5
+*.hdf
+
+# Logs and local OS/editor clutter
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db

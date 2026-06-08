@@ -1,0 +1,67 @@
+---
+title: "LiDAR Tolerance Recut and Agreement Audit"
+format: html
+execute:
+  eval: false
+---
+
+## Purpose
+
+Show how agreement diagnostics support tolerance-rule decisions, and how
+rule-dependent outputs can be re-derived without reprocessing point clouds.
+
+Source references:
+
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/05_audit_teacher_agreement.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/R/06_apply_alternate_tolerance.R`
+- `C:/Users/dev/work/manglaria/repos/mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
+sensitivity <- readr::read_csv(
+  file.path(root, "data", "mia_lidar", "audit_tolerance_sensitivity.csv"),
+  show_col_types = FALSE
+)
+sensitivity
+```
+
+```{r}
+sensitivity |>
+  arrange(floor_m, ratio) |>
+  mutate(rule = paste0("floor=", floor_m, ", ratio=", ratio)) |>
+  select(rule, n_both_present, n_outside, pct_outside_pool)
+```
+
+```{r}
+ggplot(sensitivity, aes(x = ratio, y = pct_outside_pool, color = factor(floor_m))) +
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Relative tolerance ratio",
+    y = "Outside tolerance (%)",
+    color = "Floor (m)"
+  )
+```
+
+## Re-derive outputs
+
+`R/06_apply_alternate_tolerance.R` reads durable rule-independent rasters
+(`chm_p95`, `zq95`, `chm_p95_count`) and rewrites only the rule-dependent
+outputs:
+
+- `agreement`
+- `agreement_qc`
+- `agreement_reason`
+- `teacher_labels`
+
+```{bash}
+Rscript R/06_apply_alternate_tolerance.R
+```
+
+This is the preferred path for tolerance re-cuts because it avoids expensive
+LiDAR rasterization.
+
