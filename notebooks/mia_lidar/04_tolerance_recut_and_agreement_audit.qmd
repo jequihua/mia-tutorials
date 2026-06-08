@@ -17,13 +17,13 @@ Source references:
 - `../mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
 
 ```{r}
+library(here)
 library(readr)
 library(dplyr)
 library(ggplot2)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
 sensitivity <- readr::read_csv(
-  file.path(root, "data", "mia_lidar", "audit_tolerance_sensitivity.csv"),
+  here::here("data", "mia_lidar", "audit_tolerance_sensitivity.csv"),
   show_col_types = FALSE
 )
 sensitivity

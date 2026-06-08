@@ -18,8 +18,7 @@ This tutorial is based on:
 - `../mia-lidar/notes/009_dji_l1_vendor_las_quirks.md`
 
 These paths assume `mia-tutorials` and `mia-lidar` are sibling repositories.
-Modify `repos_root` or `lidar_repo` below if your checkout uses a different
-layout.
+Modify `lidar_repo` below if your checkout uses a different layout.
 
 Raw `.las` / `.laz` files are intentionally not copied into this tutorial repo.
 The copied fixtures are a reserve polygon, an extent polygon, and a tiny
@@ -34,17 +33,16 @@ gs://<manglaria-lidar-bucket>/<reserve-or-case-study>/
 ```
 
 ```{r}
+library(here)
 library(sf)
 library(terra)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-repos_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
-lidar_repo <- file.path(repos_root, "mia-lidar")
-data_dir <- file.path(root, "data", "mia_lidar")
+lidar_repo <- here::here("..", "mia-lidar")
+data_dir <- here::here("data", "mia_lidar")
 
-rbmn <- sf::st_read(file.path(data_dir, "rbmn.geojson"), quiet = TRUE)
-extent <- sf::st_read(file.path(data_dir, "rbmnn_extent.geojson"), quiet = TRUE)
-chm <- terra::rast(file.path(data_dir, "sample_chm_mean_10m.tif"))
+rbmn <- sf::st_read(here::here("data", "mia_lidar", "rbmn.geojson"), quiet = TRUE)
+extent <- sf::st_read(here::here("data", "mia_lidar", "rbmnn_extent.geojson"), quiet = TRUE)
+chm <- terra::rast(here::here("data", "mia_lidar", "sample_chm_mean_10m.tif"))
 ```
 
 ## Inspect copied fixtures
@@ -68,13 +66,14 @@ terra::global(chm, fun = c("min", "mean", "max"), na.rm = TRUE)
 
 Use this only when raw LiDAR data are available locally or mounted from cloud
 storage. If using Google Cloud Storage, first sync the relevant case-study
-folder or mount it, then point `area_dir` at the resulting TP/GP/AP folder.
+folder into `data/mia_lidar/raw/`, then point `area_dir` at the resulting
+TP/GP/AP folder. The `data/mia_lidar/raw/` folder should stay out of git.
 
 ```{r}
-source(file.path(lidar_repo, "R", "helpers.R"))
+source(here::here("..", "mia-lidar", "R", "helpers.R"))
 
-lidar_root <- "<local-or-mounted-path-to-downloaded-google-cloud-lidar>"
-area_dir <- file.path(lidar_root, "<area-folder>")
+lidar_root <- here::here("data", "mia_lidar", "raw", "<reserve-or-case-study>")
+area_dir <- here::here("data", "mia_lidar", "raw", "<reserve-or-case-study>", "<area-folder>")
 triplet <- find_lidar_triplet(area_dir)
 triplet
 ```

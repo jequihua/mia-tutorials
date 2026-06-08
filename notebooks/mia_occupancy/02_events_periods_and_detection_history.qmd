@@ -18,19 +18,17 @@ Source files:
 - `../mia-occupancy/R/utils_dates.R`
 
 These paths assume `mia-tutorials` and `mia-occupancy` are sibling
-repositories. Modify `repos_root` or `source_repo` if your checkout uses a
-different layout.
+repositories. Modify `source_repo` if your checkout uses a different layout.
 
 ```{r}
+library(here)
 library(devtools)
 library(dplyr)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-repos_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
-source_repo <- file.path(repos_root, "mia-occupancy")
+source_repo <- here::here("..", "mia-occupancy")
 load_all(source_repo)
 
-camera_path <- file.path(root, "data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
+camera_path <- here::here("data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
 
 cam_clean <- read_camera_trap_data(camera_path, tz = "UTC") |>
   build_scientific_name() |>

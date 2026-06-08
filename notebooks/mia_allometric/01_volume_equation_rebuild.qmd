@@ -21,8 +21,9 @@ repositories. Replace `../mia-allometric` with your local source-repo path if
 your checkout differs.
 
 ```{r}
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-schema_path <- file.path(root, "data", "mia_allometric", "schema_volume.sql")
+library(here)
+
+schema_path <- here::here("data", "mia_allometric", "schema_volume.sql")
 schema <- readLines(schema_path, warn = FALSE)
 cat(paste(head(schema, 60), collapse = "\n"))
 ```

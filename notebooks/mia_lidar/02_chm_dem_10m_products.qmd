@@ -25,10 +25,10 @@ clouds and interpolates local ground micro-topography before the same 10 m
 aggregation step.
 
 ```{r}
+library(here)
 library(terra)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-chm_path <- file.path(root, "data", "mia_lidar", "sample_chm_mean_10m.tif")
+chm_path <- here::here("data", "mia_lidar", "sample_chm_mean_10m.tif")
 chm <- terra::rast(chm_path)
 chm
 ```

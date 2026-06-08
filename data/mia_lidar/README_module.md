@@ -33,6 +33,19 @@ project's current Google Cloud location, for example:
 gs://<manglaria-lidar-bucket>/<reserve-or-case-study>/
 ```
 
-For local runs, download or sync the relevant case-study folder first and then
-set the tutorial `lidar_root` / `area_dir` variable to that local folder.
+For local runs, download or sync the relevant case-study folder first. The
+preferred tutorial location is a git-ignored folder under:
+
+```text
+data/mia_lidar/raw/<reserve-or-case-study>/
+```
+
+The R tutorials then refer to it with `here::here()`, for example:
+
+```r
+here::here("data", "mia_lidar", "raw", "<reserve-or-case-study>", "<area-folder>")
+```
+
+If your data are mounted somewhere else, adjust that path deliberately in your
+local working copy and avoid committing machine-specific paths.
 

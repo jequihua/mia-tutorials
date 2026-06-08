@@ -30,14 +30,18 @@ abs(chm_p95 - zq95) <= max(1.5 m, 0.15 * mean(chm_p95, zq95))
 ```
 
 ```{r}
+library(here)
 library(readr)
 library(dplyr)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-data_dir <- file.path(root, "data", "mia_lidar")
-
-manifest <- readr::read_csv(file.path(data_dir, "teacher_manifest.csv"), show_col_types = FALSE)
-agreement <- readr::read_csv(file.path(data_dir, "audit_agreement_per_parcel.csv"), show_col_types = FALSE)
+manifest <- readr::read_csv(
+  here::here("data", "mia_lidar", "teacher_manifest.csv"),
+  show_col_types = FALSE
+)
+agreement <- readr::read_csv(
+  here::here("data", "mia_lidar", "audit_agreement_per_parcel.csv"),
+  show_col_types = FALSE
+)
 ```
 
 ```{r}

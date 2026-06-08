@@ -18,19 +18,18 @@ Source files:
 - `../mia-occupancy/scripts/run_camera_only_example.R`
 
 These paths assume `mia-tutorials` and `mia-occupancy` are sibling
-repositories. Modify `repos_root` or `source_repo` below if your checkout uses
-a different layout.
+repositories. Modify `source_repo` below if your checkout uses a different
+layout.
 
 ```{r}
+library(here)
 library(devtools)
 library(dplyr)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-repos_root <- normalizePath(file.path(root, ".."), winslash = "/", mustWork = TRUE)
-source_repo <- file.path(repos_root, "mia-occupancy")
+source_repo <- here::here("..", "mia-occupancy")
 load_all(source_repo)
 
-camera_path <- file.path(root, "data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
+camera_path <- here::here("data", "mia_occupancy", "camera_trap_detections_excerpt.csv")
 ```
 
 ```{r}

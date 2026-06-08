@@ -21,11 +21,16 @@ repositories. Replace `../mia-allometric` with your local source-repo path if
 your checkout differs.
 
 ```{r}
+library(here)
 library(jsonlite)
 
-root <- normalizePath("../..", winslash = "/", mustWork = TRUE)
-schema_sql <- readLines(file.path(root, "data", "mia_allometric", "schema_unified.sql"), warn = FALSE)
-bq_schema <- jsonlite::fromJSON(file.path(root, "data", "mia_allometric", "bigquery_unified_schema.json"))
+schema_sql <- readLines(
+  here::here("data", "mia_allometric", "schema_unified.sql"),
+  warn = FALSE
+)
+bq_schema <- jsonlite::fromJSON(
+  here::here("data", "mia_allometric", "bigquery_unified_schema.json")
+)
 
 cat(paste(head(schema_sql, 80), collapse = "\n"))
 head(bq_schema)
