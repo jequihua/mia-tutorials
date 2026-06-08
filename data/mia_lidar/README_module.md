@@ -21,6 +21,18 @@ Useful source references:
 - `../mia-lidar/notes/012_architect_decision_agreement_rule_recut_v1_1.md`
 
 Do not commit raw `.las` or `.laz` archives here. Use this folder for tiny
-derived QA fixtures, manifests, or documentation that points to external-drive
-source locations.
+derived QA fixtures, manifests, or documentation that points to external data
+locations.
+
+Raw LiDAR point clouds should be downloaded from Google Cloud Storage or read
+from a mounted/cloud-accessible location before running the raw-data sections
+of the tutorials. Replace the placeholder bucket/path in notebooks with the
+project's current Google Cloud location, for example:
+
+```text
+gs://<manglaria-lidar-bucket>/<reserve-or-case-study>/
+```
+
+For local runs, download or sync the relevant case-study folder first and then
+set the tutorial `lidar_root` / `area_dir` variable to that local folder.
 

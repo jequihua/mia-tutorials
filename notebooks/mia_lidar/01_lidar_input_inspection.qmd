@@ -25,6 +25,14 @@ Raw `.las` / `.laz` files are intentionally not copied into this tutorial repo.
 The copied fixtures are a reserve polygon, an extent polygon, and a tiny
 already-derived CHM GeoTIFF.
 
+For raw point-cloud runs, download the case-study folder from Google Cloud
+Storage or read it from a mounted/cloud-accessible location. Replace the
+placeholder below with the current project bucket/path:
+
+```text
+gs://<manglaria-lidar-bucket>/<reserve-or-case-study>/
+```
+
 ```{r}
 library(sf)
 library(terra)
@@ -58,12 +66,15 @@ terra::global(chm, fun = c("min", "mean", "max"), na.rm = TRUE)
 
 ## Inspect one raw TP/GP/AP triplet
 
-Use this only when raw LiDAR data are available locally.
+Use this only when raw LiDAR data are available locally or mounted from cloud
+storage. If using Google Cloud Storage, first sync the relevant case-study
+folder or mount it, then point `area_dir` at the resulting TP/GP/AP folder.
 
 ```{r}
 source(file.path(lidar_repo, "R", "helpers.R"))
 
-area_dir <- file.path(lidar_repo, "data", "lidar", "<area-folder>")
+lidar_root <- "<local-or-mounted-path-to-downloaded-google-cloud-lidar>"
+area_dir <- file.path(lidar_root, "<area-folder>")
 triplet <- find_lidar_triplet(area_dir)
 triplet
 ```

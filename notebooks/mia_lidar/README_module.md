@@ -6,6 +6,12 @@ Tutorial goal: explain the R/lidR LiDAR product workflow from TP/GP/AP triplet
 inspection through CHM/DEM products, teacher-grid construction, agreement QA,
 and tolerance re-cuts.
 
+Raw point clouds are intentionally external to this repository. Download them
+from Google Cloud Storage, or read them from a mounted/cloud-accessible
+location, before running raw LiDAR steps. Replace placeholders such as
+`gs://<manglaria-lidar-bucket>/<reserve-or-case-study>/` with the project's
+current bucket/path.
+
 Planned Quarto documents:
 
 1. `01_lidar_input_inspection.qmd`
@@ -25,6 +31,7 @@ Planned Quarto documents:
 Notebook acceptance checklist:
 
 - Raw LAS/LAZ files remain external.
+- Google Cloud or local raw-data paths are clearly set before raw-data runs.
 - Run blocks default to `eval: false` until real paths are supplied.
 - Outputs and CRS expectations are documented before batch runs.
 
